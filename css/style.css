@@ -46,14 +46,12 @@ button > img {
     width: 4rem;
 }
 
-.bookContainer {
+#bookContainer {
     display: grid;
-    min-height: 200px;
-    width: minmax(300px, 600px);
     padding: 15px;
-    gap: 20px;
-    grid-template-rows: repeat(auto-fit, 300px);
-    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    grid-template-rows: repeat(auto-fit, minmax(10rem, 13rem));
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
 }
 
 .footer {
@@ -138,4 +136,9 @@ div.readit {
     text-align: center;
     font-weight: bold;
     color: red;
+}
+
+.wrapper {
+    align-items: center;
+    margin: 30px;
 }

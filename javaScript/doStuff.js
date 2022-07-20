@@ -1,5 +1,7 @@
 let myLibrary = []; //array for storing books, each book is an object
 
+let counter = 0;
+
 const title = document.querySelector("#title");
 const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
@@ -29,12 +31,13 @@ document.querySelector(".submit").addEventListener("click", function(event) {
         bookRead = Boolean(false);
     }
     if(bookTitle.length > 0 && bookAuthor.length > 0 && bookPages.length > 0) {
-        const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);//create new book with the current input
+        const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);
         if(isInLibrary(book)) {
             error.textContent = "This book is already in your library";
         }
         else {
             addBookToLibrary(book);
+            displayBookInLibrary(book);
             document.querySelector(".popup").style.display = "none";
             reset();
         }
@@ -53,16 +56,14 @@ function reset() {
 }
 
 function Book(title, author, pages, read) {
-    //constructor
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = Boolean(read);//convert to boolean value, otherwise it will be a string
+    this.read = Boolean(read);
 }
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
-    console.log(myLibrary);
 }
 
 function isInLibrary(book) {
@@ -78,25 +79,47 @@ function isInLibrary(book) {
     return includes;
 }
 
-function displayBooksInLibrary() {
-    //display all books, maybe on individual cards that pop up
-    for(prop in myLibrary) {
+function displayBookInLibrary(book) {
+
+    const bookContainer = document.querySelector("#bookContainer");
         //add book to grid.
-    }
+        let div = document.createElement("div");
+        let hasRead = "";
+        let clr = "";
+        if(book.read) {
+            hasRead = "Read";
+            clr ="green";
+        }
+        else {
+            hasRead = "Not read yet";
+            clr="red";
+        }
+        div.setAttribute("data-num", counter);
+
+        div.style.width = "13rem";
+        div.style.height = " 13rem";
+        div.style.border = " 4px solid #c31";
+        div.style.display = "flex";
+        div.style.flexDirection = "column";
+        div.style.gap = "10px";
+        div.style.justifyContent = "center";
+        div.style.alignItems = "center";
+        div.style.borderRadius = "5px";
+        div.innerHTML = `
+        <p class="BookTitle">"${book.title}"</p>
+
+        <p class="BookAuthor">${book.author}</p>
+
+        <p class="BookPages">${book.pages}${" pages"}</p>
+
+        <button style="background: ${clr}; color: white; padding: 5px; border-radius: 4px;" class="HasRead${counter}">${hasRead}</button>
+
+        <button class="Remove">Remove</button>
+        `;
+
+        counter++;
+
+        bookContainer.appendChild(div);
+        book.colorButtonClass = `"HasRead${counter}`;
+        console.log(book);
 }
-
-//change read status
-function changeReadStatus() {
-    //check if read button has been clicked, check current status, change 
-    //to other status accordingly
-}
-//remove books
-
-function remove() {
-    //check if remove button on book panel was clicked, if yes, remove panel and
-    //also remove book from array
-}
-
-//submit button click should add new bock
-
-console.log(myLibrary);
