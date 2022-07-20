@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <style defer href="./javaScript/doStuff.js" rel="javascript/text"></style>
+    <script defer src="./javaScript/doStuff.js"></script>
     <title>Library</title>
 </head>
 <body>
@@ -20,6 +20,27 @@
             <button class="addBook">
                 <img src="./images/mono-tab-new.svg" alt="plus sign" class="add">
             </button>
+
+            <div class="popup">
+                <div class="popup-content">
+                    <button class="close">X</button>
+                    <h1 class="text">Add a book</h1>
+                    <form class="myform">
+                        <input type="text" class="title" placeholder="Title">
+                        <input type="text" class="author" placeholder="Author">
+                        <input type="number" class="pages" placeholder="Number of pages">
+
+                        <!--add read checkbox-->
+                        <div class="readit">
+                            <label for="read">Read it?</label>
+                            <input type="checkbox" id="read" name="isRead">
+                        </div>
+
+                        <button class="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
 
         <div class="bookContainer">

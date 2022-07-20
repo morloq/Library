@@ -33,7 +33,7 @@ button:hover {
     transition: transform ease-out 250ms ease-in 250ms;
 }
 
-button {
+button.addBook {
     height: 6rem;
     width: 9rem;
     background: #c31;
@@ -64,4 +64,68 @@ button > img {
     padding: 1.5rem;
     font-weight: bold;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+}
+
+
+.popup{
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content{
+    height: 300px;
+    width: 500px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+input:not(#read){
+    margin: 20px auto;
+    display: block;
+    width: 50%;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.close{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    margin: 5px;
+    width: 30px;
+    height: 20px;
+    border-radius: 5px;
+    background: black;
+    color: white;
+}
+
+.submit{
+    background-color: black;
+    display:block;
+    margin: 10px auto;
+    margin-top: 35px;
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    box-shadow: 6px 6px 29px -2px rgba(0,0,0,0.75);
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+div.readit {
+    display:flex;
+    justify-content: center;
+    gap: 10px;
 }
