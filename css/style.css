@@ -79,8 +79,8 @@ button > img {
 }
 
 .popup-content{
-    height: 300px;
-    width: 500px;
+    height: 400px;
+    min-width: 300px;
     background: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -128,4 +128,14 @@ div.readit {
     display:flex;
     justify-content: center;
     gap: 10px;
+}
+
+.error {
+    height: 20px;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: red;
 }

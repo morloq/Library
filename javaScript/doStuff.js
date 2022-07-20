@@ -1,5 +1,11 @@
 let myLibrary = []; //array for storing books, each book is an object
 
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const checkbox = document.getElementById("read");
+
+const error = document.querySelector(".error");
 
 document.querySelector(".addBook").addEventListener("click", () => {
     document.querySelector(".popup").style.display = "flex";
@@ -7,34 +13,44 @@ document.querySelector(".addBook").addEventListener("click", () => {
 document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".popup").style.display = "none";
 })
-document.querySelector(".submit").addEventListener("click", () => {
+document.querySelector(".submit").addEventListener("click", function(event) {
+
+    event.preventDefault();
+    
     //get input from fields.
-    let bookTitle = document.querySelector(".title").value;
-    let bookAuthor = document.querySelector(".author").value
-    let bookPages = document.querySelector(".pages").value;
+    let bookTitle = title.value;
+    let bookAuthor = author.value;
+    let bookPages = pages.value;
     let bookRead ;
-    if(document.getElementById("read").checked) {
+    if(checkbox.checked) {
         bookRead = Boolean(true);
     }
     else {
         bookRead = Boolean(false);
     }
-    console.log(bookTitle, bookAuthor, bookPages, bookRead);
-
-    const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);//create new book with the current input
-
-    addBookToLibrary(book);
+    if(bookTitle.length > 0 && bookAuthor.length > 0 && bookPages.length > 0) {
+        const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);//create new book with the current input
+        if(isInLibrary(book)) {
+            error.textContent = "This book is already in your library";
+        }
+        else {
+            addBookToLibrary(book);
+            document.querySelector(".popup").style.display = "none";
+            reset();
+        }
+    }
+    else {
+        error.textContent = "Fill out all fields";
+    }
 });
 
-//add book form validation:
-//fields cannot be empty
-//existing titles cannot be reused if the book already exists
-//in general, check if the book already exists, if it does, do not add it
-
-//check that input is valid
-//pages -> only numbers
-//author -> not numbers
-//title -> leave relatively open as they can be weird
+function reset() {
+    title.value = null;
+    author.value = null;
+    pages.value = null;
+    checkbox.checked = false;
+    error.textContent = "";
+}
 
 function Book(title, author, pages, read) {
     //constructor
@@ -45,15 +61,21 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-    addBookToLibrary(book);//does not work, even if it did, not sure if there
-    //would not be an error because I asigned the book function to a variable...
-
-
-    document.querySelector(".popup").style.display = "none";
-
     myLibrary.push(book);
-    
     console.log(myLibrary);
+}
+
+function isInLibrary(book) {
+    let includes = false;
+    for(i = 0; i < myLibrary.length; i++) {
+        if(myLibrary[i].title == book.title) {
+            includes = true;
+        }
+        else {
+            includes = false;
+        }
+    }
+    return includes;
 }
 
 function displayBooksInLibrary() {
