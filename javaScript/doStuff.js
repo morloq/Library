@@ -140,23 +140,17 @@ function changeColor() {
 function remove() {
 
     //remove buttons:
-    const buttonsRemove = document.querySelectorAll(".Remove").length;
-    console.log(buttonsRemove);
-    for(var i = 0; i < buttonsRemove; i++) {
-        let currentBtn = document.querySelectorAll(".Remove")[i];
-        currentBtn.addEventListener("click", function() {
-            //get parent element attribute
-            //remove said button from everything
-            let parentAttr = currentBtn.parentNode.getAttribute("data-num");
-            for(const book of myLibrary) {
-                if(book.dataNum == parentAttr) {
-                    const index = myLibrary.indexOf(book);
-                    const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
-                    document.getElementById("bookContainer").removeChild(div);//also works
-                    myLibrary.splice(index, 1);//remove said book from array, works
-                    break;//exit when found and removed.
+    document.querySelectorAll('.Remove').forEach(button => {
+        button.addEventListener('click', () => {
+            const dataNum = button.parentNode.getAttribute('data-num');
+            for(i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].dataNum === dataNum) {
+                    const div = document.querySelector(`div[data-num="${dataNum}"]`);
+                    div.parentNode.removeChild(div);
+                    myLibrary.splice(i, 1);//not ideal, but oh well...
+                    break;
                 }
-            }
+            };
         });
-    }
+    });
 }
