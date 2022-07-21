@@ -45,7 +45,7 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     else {
         error.textContent = "Fill out all fields";
     }
-    // changeColor();
+    changeColor();
     remove();
 });
 
@@ -124,51 +124,21 @@ function displayBookInLibrary(book) {
         book.dataNum = `${counter}`;
 
         counter++;
-        console.log(book);
-                //change color and text of read buttons
-                const buttons = document.querySelectorAll(".HasRead").length;
-
-                for(var i = 0; i < buttons; i++) {
-        
-                    let currentBtn = document.querySelectorAll(".HasRead")[i];
-                    currentBtn.addEventListener("click", function() {
-                        if(currentBtn.textContent == "Read") {
-                            currentBtn.textContent = "Not read yet";
-                            currentBtn.style.background = "red";
-                            return;
-                        }
-                        else {
-                            currentBtn.textContent = "Read";
-                            currentBtn.style.background = "green";
-                            return;
-                        }
-                    })
-                }
 }
 
-// function changeColor() {
-//     //change color and text of read buttons
-//     const buttons = document.querySelectorAll(".HasRead").length;
-
-//     for(var i = 0; i < buttons; i++) {
-
-//         let currentBtn = document.querySelectorAll(".HasRead")[i];
-//         currentBtn.addEventListener("click", function() {
-//             if(currentBtn.textContent == "Read") {
-//                 currentBtn.textContent = "Not read yet";
-//                 currentBtn.style.background = "red";
-//             }
-//             else {
-//                 currentBtn.textContent = "Read";
-//                 currentBtn.style.background = "green";
-//             }
-//         })
-//     }
-// }
+function changeColor() {
+    //change color and text of read buttons
+    const buttons = document.querySelectorAll(".HasRead");
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.textContent = button.textContent === 'Read' ? 'Not read yet' : 'Read';
+            button.style.background = button.style.background === 'red' ? 'green' : 'red';
+        });
+    });
+}
 
 function remove() {
 
-    
     //remove buttons:
     const buttonsRemove = document.querySelectorAll(".Remove").length;
     console.log(buttonsRemove);
@@ -184,7 +154,7 @@ function remove() {
                     const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
                     document.getElementById("bookContainer").removeChild(div);//also works
                     myLibrary.splice(index, 1);//remove said book from array, works
-                    break;
+                    break;//exit when found and removed.
                 }
             }
         });
