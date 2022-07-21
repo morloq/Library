@@ -45,7 +45,7 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     else {
         error.textContent = "Fill out all fields";
     }
-    changeColor();
+    // changeColor();
     remove();
 });
 
@@ -125,30 +125,50 @@ function displayBookInLibrary(book) {
 
         counter++;
         console.log(book);
+                //change color and text of read buttons
+                const buttons = document.querySelectorAll(".HasRead").length;
+
+                for(var i = 0; i < buttons; i++) {
+        
+                    let currentBtn = document.querySelectorAll(".HasRead")[i];
+                    currentBtn.addEventListener("click", function() {
+                        if(currentBtn.textContent == "Read") {
+                            currentBtn.textContent = "Not read yet";
+                            currentBtn.style.background = "red";
+                            return;
+                        }
+                        else {
+                            currentBtn.textContent = "Read";
+                            currentBtn.style.background = "green";
+                            return;
+                        }
+                    })
+                }
 }
 
-function changeColor() {
-    //change color and text of read buttons
-    const buttons = document.querySelectorAll(".HasRead").length;
+// function changeColor() {
+//     //change color and text of read buttons
+//     const buttons = document.querySelectorAll(".HasRead").length;
 
-    for(var i = 0; i < buttons; i++) {
+//     for(var i = 0; i < buttons; i++) {
 
-        let currentBtn = document.querySelectorAll(".HasRead")[i];
-        currentBtn.addEventListener("click", function() {
-            if(currentBtn.textContent == "Read") {
-                currentBtn.textContent = "Not read yet";
-                currentBtn.style.background = "red";
-            }
-            else {
-                currentBtn.textContent = "Read";
-                currentBtn.style.background = "green";
-            }
-        })
-    }
-}
+//         let currentBtn = document.querySelectorAll(".HasRead")[i];
+//         currentBtn.addEventListener("click", function() {
+//             if(currentBtn.textContent == "Read") {
+//                 currentBtn.textContent = "Not read yet";
+//                 currentBtn.style.background = "red";
+//             }
+//             else {
+//                 currentBtn.textContent = "Read";
+//                 currentBtn.style.background = "green";
+//             }
+//         })
+//     }
+// }
 
 function remove() {
 
+    
     //remove buttons:
     const buttonsRemove = document.querySelectorAll(".Remove").length;
     console.log(buttonsRemove);
@@ -162,12 +182,9 @@ function remove() {
                 if(book.dataNum == parentAttr) {
                     const index = myLibrary.indexOf(book);
                     const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
-                    document.getElementById("bookContainer").removeChild(div);//also works
-
+                    document.getElementById("bookContainer").removeChild(div);//also wor
                     myLibrary.splice(index, 1);//remove said book from array, works
-                }
-                else {
-                    return;
+                    return false;
                 }
             }
         });
