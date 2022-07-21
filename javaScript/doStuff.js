@@ -64,16 +64,7 @@ function addBookToLibrary(book) {
 }
 
 function isInLibrary(book) {
-    let includes = false;
-    for(i = 0; i < myLibrary.length; i++) {
-        if(myLibrary[i].title == book.title) {
-            includes = true;
-        }
-        else {
-            includes = false;
-        }
-    }
-    return includes;
+    return myLibrary.find(item => item.title === book.title) !== undefined;//returns true if not undefined, so book already exists
 }
 
 function displayBookInLibrary(book) {
