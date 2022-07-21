@@ -184,7 +184,7 @@ function remove() {
                     const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
                     document.getElementById("bookContainer").removeChild(div);//also wor
                     myLibrary.splice(index, 1);//remove said book from array, works
-                    return false;
+                    return;
                 }
             }
         });
