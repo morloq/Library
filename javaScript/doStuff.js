@@ -40,7 +40,6 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     else {
         error.textContent = "Fill out all fields";
     }
-    changeColor();
     remove();
 });
 
@@ -101,26 +100,22 @@ function displayBookInLibrary(book) {
 
         <p class="BookPages">${book.pages}${" pages"}</p>
 
-        <button style="background: ${clr}; color: white; padding: 5px; border-radius: 4px;" class="HasRead">${hasRead}</button>
+        <button style="background: ${clr}; color: white; padding: 5px; border-radius: 4px;" class="HasRead${counter}">${hasRead}</button>
 
         <button class="Remove">Remove</button>
         `;
 
         bookContainer.appendChild(div);
+
         book.dataNum = `${counter}`;
-
-        counter++;
-}
-
-function changeColor() {
-    //change color and text of read buttons
-    const buttons = document.querySelectorAll(".HasRead");
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
+        //add event listener to HasRead button.
+        const button = document.querySelector(`.HasRead${counter}`);
+        button.addEventListener("click", () => {
             button.textContent = button.textContent === 'Read' ? 'Not read yet' : 'Read';
             button.style.background = button.style.background === 'red' ? 'green' : 'red';
         });
-    });
+
+        counter++;
 }
 
 function remove() {
