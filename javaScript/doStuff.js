@@ -106,6 +106,7 @@ function displayBookInLibrary(book) {
         div.style.gap = "10px";
         div.style.justifyContent = "center";
         div.style.alignItems = "center";
+        div.style.textAlign = "center";
         div.style.borderRadius = "5px";
         div.innerHTML = `
         <p class="BookTitle">"${book.title}"</p>
