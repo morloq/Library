@@ -182,9 +182,9 @@ function remove() {
                 if(book.dataNum == parentAttr) {
                     const index = myLibrary.indexOf(book);
                     const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
-                    document.getElementById("bookContainer").removeChild(div);//also wor
+                    document.getElementById("bookContainer").removeChild(div);//also works
                     myLibrary.splice(index, 1);//remove said book from array, works
-                    return;
+                    break;
                 }
             }
         });
