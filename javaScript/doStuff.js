@@ -45,6 +45,8 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     else {
         error.textContent = "Fill out all fields";
     }
+    changeColor();
+    remove();
 });
 
 function reset() {
@@ -122,48 +124,51 @@ function displayBookInLibrary(book) {
 
         counter++;
         console.log(book);
+}
 
-        //change color and text of read buttons
-        const buttons = document.querySelectorAll(".HasRead").length;
+function changeColor() {
+    //change color and text of read buttons
+    const buttons = document.querySelectorAll(".HasRead").length;
 
-        for(var i = 0; i < buttons; i++) {
+    for(var i = 0; i < buttons; i++) {
 
-            let currentBtn = document.querySelectorAll(".HasRead")[i];
-            currentBtn.addEventListener("click", function() {
-                if(currentBtn.textContent == "Read") {
-                    currentBtn.textContent = "Not read yet";
-                    currentBtn.style.background = "red";
+        let currentBtn = document.querySelectorAll(".HasRead")[i];
+        currentBtn.addEventListener("click", function() {
+            if(currentBtn.textContent == "Read") {
+                currentBtn.textContent = "Not read yet";
+                currentBtn.style.background = "red";
+            }
+            else {
+                currentBtn.textContent = "Read";
+                currentBtn.style.background = "green";
+            }
+        })
+    }
+}
+
+function remove() {
+
+    //remove buttons:
+    const buttonsRemove = document.querySelectorAll(".Remove").length;
+    console.log(buttonsRemove);
+    for(var i = 0; i < buttonsRemove; i++) {
+        let currentBtn = document.querySelectorAll(".Remove")[i];
+        currentBtn.addEventListener("click", function() {
+            //get parent element attribute
+            //remove said button from everything
+            let parentAttr = currentBtn.parentNode.getAttribute("data-num");
+            for(const book of myLibrary) {
+                if(book.dataNum == parentAttr) {
+                    const index = myLibrary.indexOf(book);
+                    const div = document.querySelector(`div[data-num="${parentAttr}"]`);//works
+                    document.getElementById("bookContainer").removeChild(div);//also works
+
+                    myLibrary.splice(index, 1);//remove said book from array, works
                 }
                 else {
-                    currentBtn.textContent = "Read";
-                    currentBtn.style.background = "green";
+                    return;
                 }
-            })
-        }
-
-        //remove buttons:
-        const buttonsRemove = document.querySelectorAll(".Remove").length;
-        console.log(buttonsRemove);
-        for(var i = 0; i < buttonsRemove; i++) {
-            let currentBtn = document.querySelectorAll(".Remove")[i];
-            currentBtn.addEventListener("click", function() {
-                //get parent element attribute
-                //remove said button from everything
-                let parentAttr = currentBtn.parentNode.getAttribute("data-num");
-               // alert(parentAttr);//is correct!
-                for(const book of myLibrary) {
-                    if(book.dataNum == parentAttr) {
-                        const index = myLibrary.indexOf(book);
-                        const div = document.querySelector(`div[data-id="${book.dataNum}"]`);//why is this null?
-
-                        document.querySelector("bookContainer").removeChild(div);
-
-                        myLibrary.splice(index, 1);//remove said book from array, works
-                    }
-                    else {
-                        return;
-                    }
-                }
-            });
-        }
+            }
+        });
+    }
 }
