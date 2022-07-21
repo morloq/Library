@@ -24,8 +24,8 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     let bookAuthor = author.value;
     let bookPages = pages.value;
     let bookRead = checkbox.checked;
-    
-    if(bookTitle.length && bookAuthor.length && bookPages.length) {
+
+    if(bookTitle.length && bookAuthor.length && bookPages.length && bookPages > 0) {
         const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);
         if(isInLibrary(book)) {
             error.textContent = "This book is already in your library";
@@ -38,7 +38,7 @@ document.querySelector(".submit").addEventListener("click", function(event) {
         }
     }
     else {
-        error.textContent = "Fill out all fields";
+        error.textContent = "Fill out all fields, input must be valid";
     }
     remove();
 });
@@ -81,6 +81,12 @@ function displayBookInLibrary(book) {
             hasRead = "Not read yet";
             clr="red";
         }
+
+        let pluralSingular = "pages";
+        if(book.pages < 2) {
+            pluralSingular = "page";
+        }
+
         div.setAttribute("data-num", counter);
 
         div.style.width = "13rem";
@@ -98,7 +104,7 @@ function displayBookInLibrary(book) {
 
         <p class="BookAuthor">${book.author}</p>
 
-        <p class="BookPages">${book.pages}${" pages"}</p>
+        <p class="BookPages">${book.pages} ${pluralSingular}</p>
 
         <button style="background: ${clr}; color: white; padding: 5px; border-radius: 4px;" class="HasRead${counter}">${hasRead}</button>
 
@@ -106,6 +112,8 @@ function displayBookInLibrary(book) {
         `;
 
         bookContainer.appendChild(div);
+
+
 
         book.dataNum = `${counter}`;
         //add event listener to HasRead button.
