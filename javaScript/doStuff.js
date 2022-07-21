@@ -23,14 +23,9 @@ document.querySelector(".submit").addEventListener("click", function(event) {
     let bookTitle = title.value;
     let bookAuthor = author.value;
     let bookPages = pages.value;
-    let bookRead ;
-    if(checkbox.checked) {
-        bookRead = Boolean(true);
-    }
-    else {
-        bookRead = Boolean(false);
-    }
-    if(bookTitle.length > 0 && bookAuthor.length > 0 && bookPages.length > 0) {
+    let bookRead = checkbox.checked;
+    
+    if(bookTitle.length && bookAuthor.length && bookPages.length) {
         const book = new Book(bookTitle, bookAuthor, bookPages, bookRead);
         if(isInLibrary(book)) {
             error.textContent = "This book is already in your library";
