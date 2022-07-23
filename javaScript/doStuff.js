@@ -1,3 +1,11 @@
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = Boolean(read);
+    }
+}
 let myLibrary = []; //array for storing books, each book is an object
 
 let counter = 0;
@@ -49,13 +57,6 @@ function reset() {
     pages.value = null;
     checkbox.checked = false;
     error.textContent = "";
-}
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = Boolean(read);
 }
 
 function addBookToLibrary(book) {
